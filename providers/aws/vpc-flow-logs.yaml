@@ -1,0 +1,20 @@
+Parameters:
+  vpcId:
+    Description: "VPC ID"
+    Type: AWS::EC2::VPC::Id
+
+Resources:
+  SamuraiFlowLogs:
+    Type: AWS::EC2::FlowLog
+    Properties:
+      ResourceId: !Ref vpcId
+      ResourceType: VPC
+      TrafficType: ALL
+      LogDestination: !ImportValue "Samurai-xdr-eu-central-1-s3-bucket-arm"
+      LogDestinationType: s3
+      LogFormat: ${account-id} ${action} ${az-id} ${bytes} ${dstaddr} ${dstport} ${end} ${flow-direction} ${instance-id} ${interface-id} ${log-status} ${packets} ${pkt-dst-aws-service} ${pkt-dstaddr} ${pkt-src-aws-service} ${pkt-srcaddr} ${protocol} ${region} ${srcaddr} ${srcport} ${start} ${sublocation-id} ${sublocation-type} ${subnet-id} ${tcp-flags} ${traffic-path} ${type} ${version} ${vpc-id}
+      MaxAggregationInterval: 60
+      DestinationOptions:
+        FileFormat: plain-text
+        HiveCompatiblePartitions: false
+        PerHourPartition: true
