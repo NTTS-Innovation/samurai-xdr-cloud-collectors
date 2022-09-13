@@ -1,5 +1,4 @@
-
-#NTT Samurai XDR S3 Integration
+# NTT Samurai XDR S3 Integration
 
 Main Samurai Template to allow object collection for Samurai XDR collection.
 Create a Ingetragions in your SamuraiXDR Portal and retrieve the Integrations Id and Pass Key. 
