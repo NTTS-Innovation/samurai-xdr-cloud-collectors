@@ -33,7 +33,7 @@ If a KMS Key is used to encrypted the S3 Objects in the Samurai S3 Bucket, the f
 This allows the Samurai AWS Reader to use the key to decrypt the data on ingest.   
 ```json
 {
-    "Sid": "Allow NTTHS SamuraiXdr account to use this KMS key",
+    "Sid": "Allow NTTHS Samurai Xdr account to use this KMS key",
     "Effect": "Allow",
     "Principal": {
         "AWS": "arn:aws:iam::600502389717:root"
