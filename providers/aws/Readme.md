@@ -30,7 +30,7 @@ Creates VPC Flow logs and sets the destination to the Samurai S3 Bucket created 
 
 ## AWS KMS (Optional)
 If a KMS Key is used to encrypted the S3 Objects in the Samurai S3 Bucket, the following needs to be added to the KMS Key Policy.
-This allows the Samurai to use the key to decrypt the data on ingest.   
+This allows the Samurai AWS Reader to use the key to decrypt the data on ingest.   
 ```json
 {
     "Sid": "Allow NTTHS SamuraiXdr account to use this KMS key",
