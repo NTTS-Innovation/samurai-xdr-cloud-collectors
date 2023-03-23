@@ -49,7 +49,7 @@
             }
           },
           "templateLink": {
-            "uri": "https://raw.githubusercontent.com/NTTS-Innovation/ntt-samurai-cloud-integrations/main/providers/azure/samuraiArm.json",
+            "uri": "https://raw.githubusercontent.com/NTTS-Innovation/samurai-xdr-cloud-integrations/main/providers/azure/samuraiArm.json",
             "contentVersion": "1.0.0.0"
           }
         }
