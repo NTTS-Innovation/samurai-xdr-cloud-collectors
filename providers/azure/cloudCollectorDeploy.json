@@ -45,7 +45,7 @@
             }
           },
           "templateLink": {
-            "uri": "https://raw.githubusercontent.com/NTTS-Innovation/samurai-xdr-cloud-integrations/feature-azure-cloud-collector/providers/azure/cloudCollectorDeploy.json",
+            "uri": "https://raw.githubusercontent.com/NTTS-Innovation/samurai-xdr-cloud-integrations/feature-azure-cloud-collector/providers/azure//Users/jflowers/PycharmProjects/samurai/samurai-xdr-cloud-integrations/providers/azure/cloudCollector.json",
             "contentVersion": "1.0.0.0"
           }
         }
