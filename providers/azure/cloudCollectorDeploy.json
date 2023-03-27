@@ -2,29 +2,25 @@
     "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
     "contentVersion": "1.0.0.0",
     "parameters": {
-      "IntegrationsId": {
-        "type": "string",
-        "metadata": {
-          "description": "Integrations Id"
+        "adminUsername": {
+            "type": "string",
+            "defaultValue": "ntt-samurai"
+        },
+        "adminPassword": {
+            "type": "securestring",
+            "metadata": {
+                "description": "Admin password on all VMs."
+            }
+        },
+        "subnetId": {
+            "type": "string"
+        },
+        "cloudInit": {
+            "type": "string",
+            "metadata": {
+                "description": "Base64 encoded Cloud Init Config"
+            }
         }
-      },
-      "passkey": {
-        "type": "securestring",
-        "metadata": {
-          "description": "Integrations Passkey"
-        }
-    },
-      "endPoint": {
-      "type": "string",
-      "defaultValue": "api.westeurope.samurai.security.ntt",
-      "metadata": {
-          "description": "Provide the URL for the WebHook to receive events."
-      },
-      "allowedValues": [
-          "api.westeurope.samurai.security.ntt",
-          "api.westeurope.develop.samurai.security.ntt"
-      ]
-      }
     },
     "variables": {},
     "resources": [
@@ -36,20 +32,16 @@
           "mode": "Incremental",
           "parameters": {
             "adminUsername": {
-                "type": "string",
-                "defaultValue": "ntt-samurai"
+                "value": "[parameters('adminUsername')]"
             },
             "adminPassword": {
-                "type": "securestring",
-                "metadata": {
-                    "description": "Admin password on all VMs."
-                }
+                "value": "[parameters('adminPassword')]"
             },
             "subnetId": {
-                "type": "string"
+                "value": "[parameters('subnetId')]"
             },
             "customData": {
-                "type": "string"
+                "value": "[parameters('cloudInit')]"
             }
           },
           "templateLink": {

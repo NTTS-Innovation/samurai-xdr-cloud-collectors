@@ -1,49 +1,58 @@
 {
-    "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
-    "contentVersion": "1.0.0.0",
-    "parameters": {
-      "IntegrationsId": {
-        "type": "string",
-        "metadata": {
-          "description": "Integrations Id"
-        }
-      },
-      "passkey": {
-        "type": "securestring",
-        "metadata": {
-          "description": "Integrations Passkey"
-        }
-    },
-      "endPoint": {
+  "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "IntegrationsId": {
       "type": "string",
-      "defaultValue": "api.westeurope.samurai.security.ntt",
       "metadata": {
-          "description": "Provide the URL for the WebHook to receive events."
-      },
-      "allowedValues": [
-          "api.westeurope.samurai.security.ntt",
-          "api.westeurope.develop.samurai.security.ntt"
-      ]
+        "description": "Integrations Id"
       }
     },
-    "variables": {},
-    "resources": [
-      {
-        "type": "Microsoft.Resources/deployments",
-        "apiVersion": "2019-10-01",
-        "name": "linkedTemplate",
-        "properties": {
-          "mode": "Incremental",
-          "parameters": {
-            "location": {
-              "value": "[resourceGroup().location]"
-            },
-
-          "templateLink": {
-            "uri": "https://raw.githubusercontent.com/NTTS-Innovation/samurai-xdr-cloud-integrations/feature-azure-cloud-collector/providers/azure/cloudCollector.json",
-            "contentVersion": "1.0.0.0"
+    "passkey": {
+      "type": "securestring",
+      "metadata": {
+        "description": "Integrations Passkey"
+      }
+  },
+    "endPoint": {
+    "type": "string",
+    "defaultValue": "api.westeurope.samurai.security.ntt",
+    "metadata": {
+        "description": "Provide the URL for the WebHook to receive events."
+    },
+    "allowedValues": [
+        "api.westeurope.samurai.security.ntt",
+        "api.westeurope.develop.samurai.security.ntt"
+    ]
+    }
+  },
+  "variables": {},
+  "resources": [
+    {
+      "type": "Microsoft.Resources/deployments",
+      "apiVersion": "2019-10-01",
+      "name": "linkedTemplate",
+      "properties": {
+        "mode": "Incremental",
+        "parameters": {
+          "location": {
+            "value": "[resourceGroup().location]"
+          },
+          "integrationsID": {
+            "value": "[parameters('IntegrationsId')]"
+          },
+          "passkey": {
+            "value": "[parameters('passkey')]"
+          },
+            "endpoint": {
+            "value": "[parameters('endPoint')]"
           }
+        },
+        "templateLink": {
+          "uri": "https://raw.githubusercontent.com/NTTS-Innovation/samurai-xdr-cloud-integrations/main/providers/azure/samuraiArm.json",
+          "contentVersion": "1.0.0.0"
         }
       }
-    ]
-  }
+    }
+  ]
+}
