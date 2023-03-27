@@ -15,11 +15,11 @@
     },
     "imageOffer": {
       "type": "string",
-      "defaultValue": "UbuntuServer"
+      "defaultValue": "0001-com-ubuntu-minimal-jammy"
     },
     "imageSku": {
       "type": "string",
-      "defaultValue": "18.04-LTS"
+      "defaultValue": "minimal-22_04-lts"
     },
     "imageOSVersion": {
       "type": "string",
@@ -35,7 +35,6 @@
      },
     "adminUsername": {
       "type": "string",
-      "defaultValue": "ntt-samurai"
     },
     "adminPassword": {
       "type": "securestring",
@@ -45,7 +44,6 @@
     },
     "subnetId": {
       "type": "string",
-      "defaultValue": "/subscriptions/7991a241-7518-4600-9d5b-fea0d9b9f6e0/resourceGroups/f0lf0r0ls_group/providers/Microsoft.Network/virtualNetworks/f0lf0r0ls_group-vnet/subnets/default"
     },
     "customData": {
       "type": "string",
@@ -67,7 +65,10 @@
     }
   },
   "variables": {
-    "virtualScaleSetName": "[concat('samurai-cloud-collector')]",
+
+    "offer": "0001-com-ubuntu-minimal-jammy",
+    "sku": "minimal-22_04-lts",
+    "virtualScaleSetName": "[concat('samurai-cloud-collector', uniqueString( resourceGroup().id, deployment().name ))]",
     "networkSecurityGroupName": "[concat('samurai-cloud-collector','-nsg')]",
     "loadBalancerName": "[concat('samurai-cloud-collector','-lb')]",
     "bepoolName": "[concat(variables('loadBalancerName'), 'bepool')]",

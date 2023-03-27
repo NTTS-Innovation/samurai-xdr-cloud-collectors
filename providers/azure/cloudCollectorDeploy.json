@@ -35,12 +35,25 @@
         "properties": {
           "mode": "Incremental",
           "parameters": {
-            "location": {
-              "value": "[resourceGroup().location]"
+            "adminUsername": {
+                "type": "string",
+                "defaultValue": "ntt-samurai"
             },
-
+            "adminPassword": {
+                "type": "securestring",
+                "metadata": {
+                    "description": "Admin password on all VMs."
+                }
+            },
+            "subnetId": {
+                "type": "string"
+            },
+            "customData": {
+                "type": "string"
+            }
+          },
           "templateLink": {
-            "uri": "https://raw.githubusercontent.com/NTTS-Innovation/samurai-xdr-cloud-integrations/feature-azure-cloud-collector/providers/azure/cloudCollector.json",
+            "uri": "https://raw.githubusercontent.com/NTTS-Innovation/samurai-xdr-cloud-integrations/main/providers/azure/cloudCollectorDeploy.json",
             "contentVersion": "1.0.0.0"
           }
         }
