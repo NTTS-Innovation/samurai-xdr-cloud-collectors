@@ -2,37 +2,17 @@
   "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
   "contentVersion": "1.0.0.0",
   "parameters": {
-    "vmSku": {
-      "type": "string",
-      "defaultValue": "Standard_D2s_v3",
-      "metadata": {
-        "description": "Size of VMs in the VM Scale Set."
-      }
-    },
-    "imagePublisher": {
-      "type": "string",
-      "defaultValue": "Canonical"
-    },
-    "imageOffer": {
-      "type": "string",
-      "defaultValue": "0001-com-ubuntu-minimal-jammy"
-    },
-    "imageSku": {
-      "type": "string",
-      "defaultValue": "minimal-22_04-lts"
-    },
-    "imageOSVersion": {
-      "type": "string",
-      "defaultValue": "latest"
-    },
-    "instanceCount": {
-      "type": "int",
-      "defaultValue": 1
-    },
-     "location": {
+    "location": {
       "type": "string",
       "defaultValue": "[resourceGroup().location]"
      },
+    "logSources": {
+      "type": "string",
+      "defaultValue": "*",
+      "metadata": {
+        "description": "Log Source IP addresses/CIDR range"
+      }
+    },
     "adminUsername": {
       "type": "string",
       "defaultValue": "ntt-samurai"
@@ -70,6 +50,11 @@
     }
   },
   "variables": {
+    "vmSku": "Standard_D2s_v3",
+    "imagePublisher": "Canonical",
+    "imageOffer": "0001-com-ubuntu-minimal-jammy",
+    "imageSku": "minimal-22_04-lts",
+    "imageOSVersion": "latest",
     "virtualMachineName": "[concat('samurai-cloud-collector-', uniqueString( resourceGroup().id, deployment().name ))]",
     "dataDiskName": "[concat('samurai-cloud-collector-', uniqueString( resourceGroup().id, deployment().name ), '-disk')]",
     "publicIPAddressName": "[concat('samurai-cloud-collector-', uniqueString( resourceGroup().id, deployment().name ), '-ip')]",
@@ -121,8 +106,36 @@
               "access": "Allow",
               "priority": 123,
               "direction": "Inbound"
+              }
+            },
+            {
+              "name": "tcp_syslog",
+              "properties": {
+                "description": "TCP Syslog",
+                "protocol": "Tcp",
+                "sourcePortRange": "*",
+                "destinationPortRange": "514",
+                "sourceAddressPrefix": "[parameters('logSources')]",
+                "destinationAddressPrefix": "*",
+                "access": "Allow",
+                "priority": 100,
+                "direction": "Inbound"
+              }
+            },
+            {
+              "name": "udp_syslog",
+              "properties": {
+                "description": "UDP Syslog",
+                "protocol": "Udp",
+                "sourcePortRange": "*",
+                "destinationPortRange": "514",
+                "sourceAddressPrefix": "[parameters('logSources')]",
+                "destinationAddressPrefix": "*",
+                "access": "Allow",
+                "priority": 110,
+                "direction": "Inbound"
+              }
             }
-          }
         ]
       }
     },
@@ -190,7 +203,7 @@
       ],
       "properties": {
           "hardwareProfile": {
-              "vmSize": "[parameters('vmSku')]"
+              "vmSize": "[variables('vmSku')]"
           },
           "osProfile": {
               "computerName": "[variables('virtualMachineName')]",
@@ -201,10 +214,10 @@
           },
           "storageProfile": { 
             "imageReference": {
-              "publisher": "[parameters('imagePublisher')]",
-              "offer": "[parameters('imageOffer')]",
-              "sku": "[parameters('imageSku')]",
-              "version": "[parameters('imageOSVersion')]"
+              "publisher": "[variables('imagePublisher')]",
+              "offer": "[variables('imageOffer')]",
+              "sku": "[variables('imageSku')]",
+              "version": "[variables('imageOSVersion')]"
             },
             "osDisk": {
               "createOption": "FromImage"
