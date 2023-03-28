@@ -13,8 +13,8 @@
         "adminPasswordOrKey": {
             "type": "securestring",
                 "metadata": {
-                "description": "SSH Key or password for the Virtual Machine. SSH key is recommended."
-            },
+                    "description": "SSH Key or password for the Virtual Machine. SSH key is recommended."
+                }
         },
         "authenticationType": {
             "type": "string",
