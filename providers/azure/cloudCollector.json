@@ -38,7 +38,7 @@
     "imageSku": "minimal-22_04-lts",
     "imageOSVersion": "latest",
     "adminUsername": "ntts",
-    "adminPassword": "[uniqueString( resourceGroup().id, deployment().name )]",
+    "adminPassword": "[concat('P',uniqueString( resourceGroup().id, deployment().name ),'x','!')]",
     "virtualMachineName": "[concat('samurai-cloud-collector-', uniqueString( resourceGroup().id, deployment().name ))]",
     "dataDiskName": "[concat('samurai-cloud-collector-', uniqueString( resourceGroup().id, deployment().name ), '-disk')]",
     "publicIPAddressName": "[concat('samurai-cloud-collector-', uniqueString( resourceGroup().id, deployment().name ), '-ip')]",
