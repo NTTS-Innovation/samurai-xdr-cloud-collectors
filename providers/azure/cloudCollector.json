@@ -174,7 +174,6 @@
         "[variables('networkSecurityGroupName')]",
         "[variables('nicName')]",
         "[variables('dataDiskName')]"
-
       ],
       "properties": {
           "hardwareProfile": {
@@ -221,6 +220,11 @@
           }
       }
   }
-
-  ]
+  ],
+  "outputs": {
+    "password": {
+      "type": "string",
+      "value": "[variables('adminPassword')]"
+    }
+  }
 }
