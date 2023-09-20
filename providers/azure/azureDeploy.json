@@ -2,6 +2,9 @@
     "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
     "contentVersion": "1.0.0.0",
     "parameters": {
+      "CollectorName": {
+        "type": "string"
+      },
       "CollectorId": {
         "type": "string",
         "metadata": {
@@ -26,12 +29,14 @@
       ]
       }
     },
-    "variables": {},
+    "variables": {
+      "templateName": "[concat('SamuraiMDRCollector', '-', parameters('CollectorName') )]"
+    },
     "resources": [
       {
         "type": "Microsoft.Resources/deployments",
         "apiVersion": "2019-10-01",
-        "name": "SamuraiMDRCollector",
+        "name": "[variables('templateName')]",
         "properties": {
           "mode": "Incremental",
           "parameters": {
@@ -39,7 +44,7 @@
               "value": "[resourceGroup().location]"
             },
             "integrationsID": {
-              "value": "[parameters('IntegrationsId')]"
+              "value": "[parameters('CollectorId')]"
             },
             "passkey": {
               "value": "[parameters('passkey')]"
