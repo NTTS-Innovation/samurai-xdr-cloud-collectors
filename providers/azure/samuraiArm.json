@@ -136,7 +136,7 @@
                     },
                     {
                         "name": "ResourceGroup",
-                        "value": "[resourceGroup().id]"
+                        "value": "[resourceGroup().name]"
                     },
                     {
                         "name": "Location",
