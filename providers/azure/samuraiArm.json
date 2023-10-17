@@ -129,6 +129,22 @@
                     {
                         "name": "StorageAccountKey",
                         "value": "[concat('DefaultEndpointsProtocol=https;AccountName=', variables('storageAccountName'), ';AccountKey=', listKeys(resourceId(resourceGroup().name,'Microsoft.Storage/storageAccounts', variables('storageAccountName')), '2019-04-01').keys[0].value,';EndpointSuffix=core.windows.net')]"
+                    },
+                    {
+                        "name": "SubscriptionId",
+                        "value": "[subscription().subscriptionId]"
+                    },
+                    {
+                        "name": "ResourceGroup",
+                        "value": "[resourceGroup().id]"
+                    },
+                    {
+                        "name": "Location",
+                        "value": "[resourceGroup().location]"
+                    },
+                    {
+                        "name": "StorageAccount",
+                        "value": "[variables('storageAccountName')]"
                     }
                 ],
                 "containerSettings": {
@@ -143,13 +159,18 @@
                     }
                     $body = @{'integrationsId'=$Env:integrationsId;
                     'connection_string'=$Env:StorageAccountKey;
+                    'subscriptionId'=$Env:SubscriptionId;
+                    'resourceGroup'=$ENV:ResourceGroup;
+                    'location'=$ENV:Location;
+                    'storageAccount'=$ENV:StorageAccount;
                     }
 
                     $ErrorActionPreference = 'Stop'
                     $DeploymentScriptOutputs = @{}
 
 
-                    $Response = Invoke-WebRequest -Uri $Env:EndPoint -Method POST -Body ($body|ConvertTo-Json) -ContentType 'application/json' -Headers $headers -ErrorAction Stop
+                    $Response = Invoke-WebRequest -Uri $Env:EndPoint -Method POST -Body ($body|ConvertTo-Json) -ContentType 'application/json' -Headers $headers -MaximumRetryCount 10 
+
 
                     if ($Response.statuscode -gt 202)
                     {
