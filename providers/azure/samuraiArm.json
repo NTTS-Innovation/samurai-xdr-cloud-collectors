@@ -30,6 +30,7 @@
             },
             "allowedValues": [
                 "api.westeurope.samurai.security.ntt",
+                "api.westeurope.release.samurai.security.ntt",
                 "api.westeurope.develop.samurai.security.ntt"
             ]
         },
