@@ -19,15 +19,9 @@
     },
       "endPoint": {
       "type": "string",
-      "defaultValue": "api.westeurope.samurai.security.ntt",
       "metadata": {
           "description": "Provide the URL for the WebHook to receive events."
-      },
-      "allowedValues": [
-          "api.westeurope.samurai.security.ntt",
-          "api.westeurope.release.samurai.security.ntt",
-          "api.westeurope.develop.samurai.security.ntt"
-      ]
+      }
       }
     },
     "variables": {
