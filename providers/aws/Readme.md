@@ -1,14 +1,14 @@
-# NTT Samurai XDR S3 Integration
+# NTT Samurai MDR S3 Integration
 
 
-Main Samurai Template to allow object collection for Samurai XDR collection.
-Create a Integration in your SamuraiXDR Portal and retrieve the Integrations Id and Pass Key. 
+Main Samurai Template to allow object collection for Samurai MDR collection.
+Create a Integration in your SamuraiMDR Portal and retrieve the Integrations Id and Pass Key. 
 
 ## Creates the following Resources
 * SNS Topic
 * S3 Bucket with SNS Notification of ObjectCreated Events
-* Secure Bucket Policy, Allowing SamuraiXDR RO access
-* SNS HTTPS Webhook Subscription to the SamuraiXDR Platform. 
+* Secure Bucket Policy, Allowing SamuraiMDR RO access
+* SNS HTTPS Webhook Subscription to the SamuraiMDR Platform. 
 
 ## Required Parameters
 * IntegrationsId: from the Samurai Portal
@@ -33,7 +33,7 @@ If a KMS Key is used to encrypted the S3 Objects in the Samurai S3 Bucket, the f
 This allows the Samurai AWS Reader to use the key to decrypt the data on ingest.   
 ```json
 {
-    "Sid": "Allow NTTHS Samurai Xdr account to use this KMS key",
+    "Sid": "Allow NTTHS Samurai MDR account to use this KMS key",
     "Effect": "Allow",
     "Principal": {
         "AWS": "arn:aws:iam::600502389717:root"
