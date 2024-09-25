@@ -1,4 +1,4 @@
-NTT Samurai Azure Integrations
+NTT Samurai Azure Cloud Native Collector
 
 
 Requirements:

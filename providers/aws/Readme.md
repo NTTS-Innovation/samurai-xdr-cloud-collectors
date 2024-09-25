@@ -1,4 +1,4 @@
-# NTT Samurai MDR S3 Integration
+# NTT Samurai MDR S3 Cloud Native Collector
 
 
 Main Samurai Template to allow object collection for Samurai MDR collection.
